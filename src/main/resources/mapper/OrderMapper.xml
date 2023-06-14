@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jc.mapper.OrderMapper">
+
+    <select id="findStatus" resultType="com.jc.entity.Plan">
+        select sys_plan.id,status,name,sys_order.isComment from sys_order
+        join sys_plan
+        on sys_order.plan_id = sys_plan.id
+        where sys_order.student_id = #{id}
+    </select>
+
+    <select id="allPrice" resultType="com.jc.entity.Order">
+        select SUM(sys_plan.price) AS sum from sys_order
+        left join sys_plan
+        on sys_order.plan_id = sys_plan.id
+    </select>
+</mapper>

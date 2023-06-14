@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jc.mapper.CourseMapper">
+    <insert id="saveCourses">
+        insert into sys_stu_course(student_id,course_id) values(#{studentId},#{c})
+    </insert>
+
+    <select id="findPage" resultType="com.jc.entity.Course">
+        select sys_course.*, employee.name as teacher  from sys_course
+        left join employee
+        on sys_course.teacher_id = employee.id
+        <where>
+            <if test="name != null and name != ''">
+                and sys_course.name like concat('%', #{name},'%')
+            </if>
+        </where>
+        ORDER BY sys_course.id DESC
+    </select>
+
+    <select id="findCourses" resultType="com.jc.controller.dto.CourseDTO">
+        select sys_course.*, employee.name as teacherName  from sys_course
+        left join employee
+        on sys_course.teacher_id = employee.id
+        where sys_course.state = 1
+    </select>
+
+    <select id="findById" resultType="com.jc.controller.dto.CourseDTO">
+        select sys_course.*, employee.name as teacherName ,email from sys_course
+        left join employee
+        on sys_course.teacher_id = employee.id
+        where sys_course.id = #{courseId}
+    </select>
+    <select id="findAllById" resultType="com.jc.controller.dto.CourseDTO">
+        select  DISTINCT sc.* from sys_course as sc
+        join sys_stu_course as ssc
+        on sc.id = ssc.course_id
+        WHERE sc.teacher_id = #{teacherId}
+    </select>
+</mapper>

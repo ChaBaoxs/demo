@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jc.mapper.VideoMapper">
+
+    <select id="findById" resultType="com.jc.controller.dto.VideoDTO">
+        select sys_video.*, sys_course.name as cname ,sys_course.teacher_id from sys_video
+        left join sys_course
+        on sys_video.course_id = sys_course.id where teacher_id = #{id}
+    </select>
+    <select id="findAll" resultType="com.jc.controller.dto.VideoDTO">
+        select sys_video.*, sys_course.name as cname ,sys_course.teacher_id from sys_video
+        left join sys_course
+        on sys_video.course_id = sys_course.id
+    </select>
+</mapper>

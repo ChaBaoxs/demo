@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jc.mapper.PlanMapper">
+
+    <update id="setStudentPlan">
+        insert into sys_order(plan_id,student_id,create_time) values(#{planId},#{studentId},NOW())
+    </update>
+
+    <update id="updateIsDelete">
+        UPDATE sys_order SET isDetele=1
+    </update>
+
+    <select id="countIsDelete" resultType="Integer">
+        SELECT COUNT(*)  FROM sys_order  WHERE isDetele = '0'
+    </select>
+</mapper>

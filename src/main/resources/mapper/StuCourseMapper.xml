@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jc.mapper.StuCourseMapper">
+
+    <select id="findStuCourse" resultType="com.jc.entity.StuCourse">
+        select sys_stu_course.*, sys_course.name ,sys_course.weekday,sys_course.section from sys_stu_course
+        left join sys_course
+        on sys_stu_course.course_id = sys_course.id where student_id = #{id}
+    </select>
+    <select id="findById" resultType="com.jc.entity.StuCourse">
+        select ssc.*, sc.name ,weekday,section,room,score,e.name as teacher from sys_stu_course as ssc
+        left join sys_course as sc
+        on ssc.course_id = sc.id
+        join employee as e on sc.teacher_id = e.id
+        where student_id = #{studentId}
+    </select>
+
+</mapper>

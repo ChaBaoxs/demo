@@ -1,0 +1,46 @@
+server:
+  port: 9090
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+#      url: jdbc:mysql://localhost:3306/edu?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://localhost:3306/edu?serverTimezone=GMT%2b8
+      username: root
+      password: 123456
+  redis:
+      host: 127.0.0.1
+      port: 6379
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  mail:
+    host: smtp.qq.com  # 配置 smtp 服务器地址
+    port: 25   #smtp 服务器的端口
+    username: 1252458721@qq.com  #配置邮箱用户名;你自己的邮箱
+    password: oogsrocnykdsgbha  #配置申请到的授权码;这里填写刚才短信申请到的授权码
+    default-encoding: UTF-8   #配置邮件编码
+    protocol: smtp   #协议
+
+mybatis-plus:
+  configuration:
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      #分布式主键策略雪花算法
+      id-type: ASSIGN_ID
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  #扫描所有mybatis的xml文件
+
+files:
+  upload:
+    path: D:/Desktop/demo/file/
+
+videoFiles:
+  upload:
+    path: D:/Desktop/demo/videoFile/
+    coverPath: D:/Desktop/demo/videoFile/cover/
